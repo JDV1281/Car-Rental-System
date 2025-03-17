@@ -103,7 +103,6 @@ Car-Rental-System/
 - **SQLite** - Database for storing user and vehicle information
 - **Werkzeug Security** - Secure password hashing
 - **Jinja2** - Templating engine for dynamic content
-- **Bootstrap (optional)** - Frontend styling
 
 ## Future Enhancements
 
