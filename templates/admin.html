@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Admin Panel - Car Rental{% endblock %}
+{% block content %}
+    <h2>Admin Dashboard</h2>
+    <h3>Manage Vehicles</h3>
+    <form method="POST" action="{{ url_for('add_vehicle') }}">
+        <label>Vehicle Type</label>
+        <input type="text" name="vehicle_type" required>
+        <label>Price Per Day</label>
+        <input type="number" name="price_per_day" required>
+        <button type="submit">Add Vehicle</button>
+    </form>
+    <h3>Existing Vehicles</h3>
+    {% for vehicle in vehicles %}
+        <p>{{ vehicle.type }} - ${{ vehicle.price_per_day }} - Available: {{ 'Yes' if vehicle.available else 'No' }}</p>
+        <form method="POST" action="{{ url_for('delete_vehicle', vehicle_id=vehicle.id) }}">
+            <button type="submit">Remove</button>
+        </form>
+    {% endfor %}
+    <h3>Customer Reservations</h3>
+    {% for reservation, vehicle in reservations %}
+    <p>User {{ reservation.user_id }} reserved {{ vehicle.type }} from {{ reservation.start_date }} to {{ reservation.end_date }}</p>
+{% endfor %}
+{% endblock %}

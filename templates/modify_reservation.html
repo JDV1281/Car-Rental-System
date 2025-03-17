@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Modify Reservation{% endblock %}
+{% block content %}
+    <h2>Modify Reservation</h2>
+    <form method="POST">
+        <label>Start Date</label>
+        <input type="date" name="start_date" value="{{ reservation.start_date }}" required>
+        <label>End Date</label>
+        <input type="date" name="end_date" value="{{ reservation.end_date }}" required>
+        <button type="submit">Update Reservation</button>
+    </form>
+{% endblock %}

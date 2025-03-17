@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Car Rental System{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Car Rental System</h1>
+        {% if session['user_id'] %}
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            {% if session['is_admin'] %}
+                <a href="{{ url_for('admin') }}">Admin Dashboard</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

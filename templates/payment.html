@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Payment - Car Rental{% endblock %}
+{% block content %}
+    <h2>Payment</h2>
+    <p>You are paying for your reservation. Total Cost: ${{ reservation.total_cost }}</p>
+    <form method="POST">
+        <label>Card Number</label>
+        <input type="text" name="card_number" required>
+        <label>Expiration Date</label>
+        <input type="date" name="expiration_date" required>
+        <label>CCV</label>
+        <input type="text" name="ccv" required>
+        <label>Name on Card</label>
+        <input type="text" name="card_name" required>
+        <button type="submit">Confirm Payment</button>
+    </form>
+{% endblock %}
