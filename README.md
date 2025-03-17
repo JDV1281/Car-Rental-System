@@ -109,7 +109,7 @@ Car-Rental-System/
 - Add place for cutomer to enter in their email at payment page.
 - Add email notifications for reservations.
 - To register as a admin, you will need a passcode and not just checking a box that user is an admin.
-
+- Add where admins can modify and cancel user vehicle reservation.
 
 ## Author
 Developed by **JDV1281**
