@@ -49,7 +49,7 @@ http://127.0.0.1:5000/
 
 - **User Authentication** - Users can register and log in securely.
 - **Vehicle Reservation System** - Users can browse available vehicles, reserve them, and modify/cancel reservations.
-- **Admin Dashboard** - Admin users can change vehicle prices. Admins can add, delete, and modify available vehicles.
+- **Admin Dashboard** - Admin users can change vehicle prices. Admins can add, delete, and modify available vehicles. Admins can edit or cancel customer reservations.
 - **Payment System** - Users can enter payment details to confirm reservations.
 
 
@@ -103,13 +103,6 @@ Car-Rental-System/
 - **SQLite** - Database for storing user and vehicle information
 - **Werkzeug Security** - Secure password hashing
 - **Jinja2** - Templating engine for dynamic content
-
-## Future Enhancements
-
-- Add place for cutomer to enter in their email at payment page.
-- Add email notifications for reservations.
-- To register as a admin, you will need a passcode and not just checking a box that user is an admin.
-- Add where admins can modify and cancel user vehicle reservation.
 
 ## Author
 Developed by **JDV1281**
