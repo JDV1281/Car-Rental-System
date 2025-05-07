@@ -110,4 +110,4 @@ Contact: `jdverrick1@gmail.com`
 GitHub: [JDV1281](https://github.com/JDV1281/Car-Rental-System)
 
 ## Demo Video
-Watch the demo of the Car Rental System [here](https://iu.mediaspace.kaltura.com/media/t/1_imhx56zs).
+Watch the demo of the Car Rental System [here](https://iu.mediaspace.kaltura.com/media/t/1_9t0ku2bk).
