@@ -32,6 +32,7 @@ class Reservation(db.Model):
     end_date = db.Column(db.String(20), nullable=False)
     total_cost = db.Column(db.Float, nullable=False)
     paid = db.Column(db.Boolean, default=False)
+    customer_name = db.Column(db.String(100))
 
 # Homee route
 @app.route('/')
@@ -44,7 +45,8 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = generate_password_hash(request.form['password'], method='pbkdf2:sha256')
-        is_admin = request.form.get('is_admin') == 'on'
+        admin_key = request.form.get('admin_key')
+        is_admin = admin_key == '3724'
 
         new_user = User(username=username, password=password, is_admin=is_admin)
         db.session.add(new_user)
@@ -229,6 +231,8 @@ def payment(reservation_id):
             return redirect(url_for('payment', reservation_id=reservation_id))
 
         # Mark reservation as paid
+        customer_name = request.form['customer_name']
+        reservation.customer_name = customer_name
         reservation.paid = True
         db.session.commit()
 
@@ -249,6 +253,35 @@ def admin():
     reservations = db.session.query(Reservation, Vehicle).join(Vehicle, Reservation.vehicle_id == Vehicle.id).all()
     
     return render_template('admin.html', vehicles=vehicles, reservations=reservations)
+
+
+# Admin modify reservation route
+@app.route('/admin/modify_reservation/<int:reservation_id>', methods=['GET', 'POST'])
+def admin_modify_reservation(reservation_id):
+    if 'user_id' not in session or not session.get('is_admin'):
+        flash('Access denied.', 'danger')
+        return redirect(url_for('dashboard'))
+
+    reservation = Reservation.query.get_or_404(reservation_id)
+
+    if request.method == 'POST':
+        reservation.start_date = request.form['start_date']
+        reservation.end_date = request.form['end_date']
+        reservation.customer_name = request.form['customer_name']
+
+        # Recalculate cost
+        start_date_obj = datetime.strptime(reservation.start_date, '%Y-%m-%d')
+        end_date_obj = datetime.strptime(reservation.end_date, '%Y-%m-%d')
+        days = (end_date_obj - start_date_obj).days
+        vehicle = Vehicle.query.get(reservation.vehicle_id)
+        reservation.total_cost = days * vehicle.price_per_day
+
+        db.session.commit()
+        flash('Reservation updated successfully!', 'success')
+        return redirect(url_for('admin'))
+
+    return render_template('modify_reservation.html', reservation=reservation)
+
 
 
 # Add vehicle route
